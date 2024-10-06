@@ -1,5 +1,6 @@
-## Hi there 👋
+## Hi there! 👋
 
+I'm Kenneth Halling, a student at Brigham Young University-Idaho interested in computer science, full-stack development, and databases. Welcome to my GitHub profile!
 <!--
 **kennyhalling/kennyhalling** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
