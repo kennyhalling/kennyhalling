@@ -11,5 +11,3 @@ Dice.roll(10)
 Dice.roll(12)
 Dice.roll(20)
 Dice.roll(100)
-
-Dice.roll(4)
