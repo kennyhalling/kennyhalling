@@ -1,0 +1,151 @@
+---
+title: "Client Report - Project 0: Introduction"
+subtitle: "Course DS 250"
+author: "Kenneth Halling"
+format:
+  html:
+    self-contained: true
+    page-layout: full
+    title-block-banner: true
+    toc: true
+    toc-depth: 3
+    toc-location: body
+    number-sections: false
+    html-math-method: katex
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-copy: hover
+    code-tools:
+        source: false
+        toggle: true
+        caption: See code
+execute: 
+  warning: false
+    
+---
+
+```{python}
+import pandas as pd
+import numpy as np
+from lets_plot import *
+
+LetsPlot.setup_html(isolated_frame=True)
+```
+
+
+```{python}
+# Learn morea about Code Cells: https://quarto.org/docs/reference/cells/cells-jupyter.html
+
+# Include and execute your code here
+from palmerpenguins import load_penguins
+df = load_penguins()
+```
+
+## QUESTION|TASK 1
+
+__Include the tables created from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) used to create the above chart (Hint: copy the code from 2.2.1. The penguins data frame and paste each in the cells below)__
+
+
+```{python}
+# Include and execute your code here
+
+# load penguins data frame
+penguins = load_penguins()
+penguins
+
+```
+
+_include figures in chunks and discuss your findings in the figure._
+
+```{python}
+# Include and execute your code here
+
+#view head of penguins table only
+penguins.head()
+
+```
+
+
+## QUESTION|TASK 2
+
+__Recreate the example charts from [PY4DS: CH2 Data Visualization](https://aeturrell.github.io/python4DS/data-visualise.html) of the textbook. (Hint: copy the chart code from 2.2.3. Creating a Plot, one for each cell below)__
+
+
+```{python}
+# Include and execute your code here
+
+#Create a scatterplot of the penguins table where "x" is flipper length and "y" is body mass. Color code the points to 
+#represent what species they are.
+(
+    ggplot(
+        data=penguins,
+        mapping=aes(x="flipper_length_mm", y="body_mass_g", color="species"),
+    )
+    + geom_point()
+)
+
+```
+
+_include figures in chunks and discuss your findings in the figure._
+
+```{python}
+
+#Add lines that represent the relationship of a penguin's flipper length to their body mass by species
+(
+    ggplot(
+        data=penguins,
+        mapping=aes(x="flipper_length_mm", y="body_mass_g", color="species"),
+    )
+    + geom_point()
+    + geom_smooth(method="lm")
+)
+```
+
+
+```{python}
+# Include and execute your code here
+
+#Apply the color codes for species ONLY to the points. The result is a single line representing the relationship between 
+#flipper length and body mass for ALL penguins in the data frame.
+(
+    ggplot(data=penguins, mapping=aes(x="flipper_length_mm", y="body_mass_g"))
+    + geom_point(mapping=aes(color="species"))
+    + geom_smooth(method="lm")
+)
+
+```
+
+
+```{python}
+# Include and execute your code here
+
+# Apply a shape to each point based on the species that they represent.
+(
+    ggplot(data=penguins, mapping=aes(x="flipper_length_mm", y="body_mass_g"))
+    + geom_point(mapping=aes(color="species", shape="species"))
+    + geom_smooth(method="lm")
+)
+
+```
+
+
+```{python}
+# Include and execute your code here
+
+#Add human readable labels to the table, including labels for the x and y axix, a label for the legend, a table title, and #a table subtitle
+(
+    ggplot(data=penguins, mapping=aes(x="flipper_length_mm", y="body_mass_g"))
+    + geom_point(aes(color="species", shape="species"))
+    + geom_smooth(method="lm")
+    + labs(
+        title="Body mass and flipper length",
+        subtitle="Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+        x="Flipper length (mm)",
+        y="Body mass (g)",
+        color="Species",
+        shape="Species",
+    )
+)
+
+```

@@ -1,0 +1,166 @@
+---
+title: "Client Report - What's in a Name?"
+subtitle: "Course DS 250"
+author: "Kenneth Halling"
+format:
+  html:
+    self-contained: true
+    page-layout: full
+    title-block-banner: true
+    toc: true
+    toc-depth: 3
+    toc-location: body
+    number-sections: false
+    html-math-method: katex
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-copy: hover
+    code-tools:
+        source: false
+        toggle: true
+        caption: See code
+execute: 
+  warning: false
+    
+---
+
+```{python}
+import pandas as pd
+import numpy as np
+from lets_plot import *
+
+LetsPlot.setup_html(isolated_frame=True)
+```
+
+
+## Project Notes
+
+__For Project 1 the answer to each question should include a chart **and** a written response. The years labels on your charts should not include a comma. At least **two** of your charts must include reference marks.__  
+
+```{python}
+# Learn morea about Code Cells: https://quarto.org/docs/reference/cells/cells-jupyter.html
+
+# Include and execute your code here
+df = pd.read_csv("https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv")
+```
+
+## QUESTION|TASK 1
+
+__How does your name at your birth year compare to its use historically?__
+
+_My name is Kenneth. It appears that the usage of my name in the United States was most popular between 1940 and 1960, hitting an all time high in usage somewhere in the 1950s with over 25,000 babies being named Kenneth in one year. Comparitively, in 2000 when I was born, I was one of less than 5000 babies named Kenneth born that year._
+
+```{python}
+# Include and execute your code here
+kenny = df.query("name == 'Kenneth'")
+(ggplot(kenny, aes(x="year", y='Total')) 
+  + geom_line()
+  + scale_x_continuous(format="d")  
+  +labs(
+    title = "Usage of the name Kenneth in United States",
+    x = "Year",
+    y = "Babies Named Kenneth"
+
+  ))
+
+```
+
+
+## QUESTION|TASK 2
+
+__If you talked to someone named Brittany on the phone, what is your guess of his or her age? What ages would you not guess?__
+
+_There was a massive surge of babies named Brittany in 1990. Since it's 2025 right now, the safest guess of someone named Brittany's age would be 35._
+
+```{python}
+# Include and execute your code here
+britt = df.query("name == 'Brittany'")
+(ggplot(britt, aes(x="year", y='Total')) 
+  + geom_line()
+  + scale_x_continuous(format="d")  
+  +labs(
+    title = "Usage of the name Brittany in United States",
+    x = "Year",
+    y = "Babies Named Brittany"
+
+  ))
+
+```
+
+
+## QUESTION|TASK 3
+
+__Mary, Martha, Peter, and Paul are all Christian names. From 1920 - 2000, compare the name usage of each of the four names in a single chart. What trends do you notice?__
+
+_The name Mary had the biggest surge in popularity out of all four names, with over 30,000 babies a year being named Mary until the year 1964. All four names were declining in popularity it seems in the year 2000._
+
+```{python}
+# Include and execute your code here
+names = df.query("name == 'Mary' or name =='Martha' or name == 'Peter' or name == 'Paul'")
+names
+(ggplot(names, aes(x="year", y='Total', color='name')) 
+  + geom_line(aes())
+  + scale_x_continuous(limits=[1920, 2000], format="d")  
+  +labs(
+    title = "Comparison of Four Names",
+    x = "Year",
+    y = "Number of Babies"
+
+  ))
+```
+
+
+
+## QUESTION|TASK 4
+
+__Think of a unique name from a famous movie. Plot the usage of that name and see how changes line up with the movie release. Does it look like the movie had an effect on usage?__  
+
+_I decided to look into the name Andy, which was the name of the child in the 1995 movie Toy Story. After 1995, usage in the name did spike, so it's possible that more people used the name for their children after seeing the movie._
+
+
+# Include and execute your code here
+```{python}
+# Include and execute your code here
+andy = df.query("name == 'Andy'")
+andy
+
+(ggplot(andy, aes(x="year", y='Total')) 
+  + geom_line(aes())
+  + scale_x_continuous(limits=[1990], format="d")  
+  +labs(
+    title = "Usage of the Name Andy",
+    x = "Year",
+    y = "Number of Babies"
+
+  ))
+```
+
+## STRETCH QUESTION|TASK 1
+
+__Reproduce the chart Elliot using the data from the `names_year.csv` file.__ 
+
+_type your results and analysis here_
+
+```{python}
+# Include and execute your code here
+ell = df.query("name == 'Elliot'")
+ell
+
+(ggplot(ell, aes(x="year", y='Total', color='name')) 
+  + geom_line()
+  + geom_vline(xintercept=1982, linetype="dashed", color="red")
+  + geom_vline(xintercept=1985, linetype="dashed", color="red")
+  + geom_vline(xintercept=2002, linetype="dashed", color="red")
+  + scale_x_continuous(limits=[1950, 2020], format="d")
+  +labs(
+    title = "Elliot...What?",
+    x = "Year",
+    y = "Total"
+
+  ))
+
+```
+
+
+---
